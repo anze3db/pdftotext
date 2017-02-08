@@ -1,0 +1,7 @@
+.cache
+.res
+__pycache__
+.pyc
+.eggs
+pdf2text.egg-info
+venv
