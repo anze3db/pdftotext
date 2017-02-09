@@ -9,12 +9,21 @@
     <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
   </head>
   <body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-warning" role="alert">
+        <li>{{ message }}</li>
+      </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
     <div class="container">
       <div class="header clearfix">
         <h1 class="text-muted">pdf to text</h1>
       </div>
       <div class="card">
-        <form class="card-block form-inline">
+        <form class="card-block form-inline"  action="/upload" method="post" enctype="multipart/form-data">
           <input type="file" name="pdf" accept="application/pdf">
           <!--div class="form-check mb-2 mr-sm-2 mb-sm-0">
             <label class="form-check-label">
