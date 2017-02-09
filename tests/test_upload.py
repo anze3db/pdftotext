@@ -32,3 +32,9 @@ def test_toast_on_empty(uploadfn, uploadFile):
     upload = uploadfn(uploadFile, True)
     assert upload.status_code == 200, upload.status_code
     assert "No file uploaded!" in upload.data, upload.data
+
+
+def test_toast_on_invalid(uploadfn):
+    """Test if toast notifies the user when the file is not a pdf"""
+    upload = uploadfn({'pdf': (StringIO('hello'), 'invalid.pdf')}, True)
+    assert "Uploaded file is not a valid PDF" in upload.data, upload.data

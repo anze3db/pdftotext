@@ -26,4 +26,8 @@ def upload():
     if pdf is None or not pdf.filename:
         flash('No file uploaded! Please pick a file to upload.')
         return redirect(url_for('.index'))
+    try:
+        parse(pdf)
+    except PDFSyntaxError:
+        flash("Uploaded file is not a valid PDF")
     return redirect(url_for('.index'))
