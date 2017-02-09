@@ -6,6 +6,8 @@ from flask import request
 from flask import redirect
 from flask import render_template
 from flask import url_for
+from pdf2text.parser import parse
+from pdfminer.pdfparser import PDFSyntaxError
 
 
 app = Flask(__name__)
@@ -21,7 +23,7 @@ def index():
 def upload():
     """Serve the upload page"""
     pdf = request.files.get('pdf', None)
-    if pdf is None:
+    if pdf is None or not pdf.filename:
         flash('No file uploaded! Please pick a file to upload.')
         return redirect(url_for('.index'))
     return redirect(url_for('.index'))

@@ -1,5 +1,6 @@
 """Test upload endpoint"""
 
+import pytest
 from StringIO import StringIO
 
 
@@ -21,8 +22,13 @@ def test_no_toast_on_file(uploadfn):
     assert "No file uploaded!" not in upload.data
 
 
-def test_toast_on_empty(uploadfn):
+@pytest.mark.parametrize('uploadFile', (
+    None,
+    {'pdf': ''},
+    {'pdf': None},
+    {'pdf': (StringIO(''), '')}))
+def test_toast_on_empty(uploadfn, uploadFile):
     """Test if a warning toast is displayed when no file is selected"""
-    upload = uploadfn(None, True)
+    upload = uploadfn(uploadFile, True)
     assert upload.status_code == 200, upload.status_code
     assert "No file uploaded!" in upload.data, upload.data
