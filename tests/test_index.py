@@ -33,3 +33,8 @@ def test_upload_form(index):
 def test_bootstrap(index, dep):
     """Test if all bootstrap dependencies get loaded"""
     assert dep in index.data
+
+
+def test_hide_parsed_text(index):
+    """Test if textarea with parsed text is hidden by default"""
+    assert '<textarea rows="10">' not in index.data, index.data

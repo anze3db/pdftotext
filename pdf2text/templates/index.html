@@ -33,6 +33,12 @@
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
+      {% if parsed_text %}
+      <br />
+      <p class="card">
+        <textarea rows="10">{{ parsed_text }}</textarea>
+      </p>
+      {% endif %}
     </div>
   </body>
 </html>

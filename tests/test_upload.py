@@ -38,3 +38,10 @@ def test_toast_on_invalid(uploadfn):
     """Test if toast notifies the user when the file is not a pdf"""
     upload = uploadfn({'pdf': (StringIO('hello'), 'invalid.pdf')}, True)
     assert "Uploaded file is not a valid PDF" in upload.data, upload.data
+
+
+def test_show_text_on_upload(uploadfn):
+    """Test if pdf text is correctly shown"""
+    with open('tests/pdfs/hello.pdf') as f:
+        upload = uploadfn({'pdf': f}, True)
+    assert "hello world" in upload.data, upload.data
