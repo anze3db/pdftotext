@@ -18,6 +18,8 @@ def test_page_title(index):
 
 def test_upload_form(index):
     """Test if the index page has the upload elements"""
+    assert b'action="/upload" method="post" enctype="multipart/form-data"'\
+        in index.data
     assert (b'<input type="file" name="pdf"'
             b' accept="application/pdf">') in index.data
     assert (b'<button type="submit" class="btn btn-primary"'
