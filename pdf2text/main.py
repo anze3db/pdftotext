@@ -33,4 +33,4 @@ def upload():
     except PDFSyntaxError:
         flash("Uploaded file is not a valid PDF")
         return redirect(url_for('.index'))
-    return render_template('index.html', parsed_text=parsed)
+    return render_template('index.html', parsed_text=unicode(parsed, "utf8"))
