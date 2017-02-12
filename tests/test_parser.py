@@ -1,3 +1,5 @@
+# -*- coding: utf8 -*-
+
 """Test Parser"""
 
 import pytest
@@ -17,3 +19,11 @@ def test_parser():
     with open('tests/pdfs/hello.pdf', 'rb') as f:
         text = parser.parse(f)
     assert text.strip() == 'hello world', text.strip()
+
+
+def test_parse_unicode():
+    """Test if unicode is parsed correctly"""
+    with open('tests/pdfs/unicode.pdf', 'rb') as f:
+        text = parser.parse(f)
+    assert "unicode čćç" in text, text
+
