@@ -8,6 +8,7 @@ from pdf2text import parser
 
 from pdfminer.pdfparser import PDFSyntaxError
 
+
 def test_not_parsable():
     """Test if parser raises exception on invalid file"""
     with pytest.raises(PDFSyntaxError):
@@ -27,3 +28,9 @@ def test_parse_unicode():
         text = parser.parse(f)
     assert "unicode čćç" in text, text
 
+
+def test_parse_newlines():
+    """Test if newlines are parsed correctly"""
+    with open('tests/pdfs/newline.pdf', 'rb') as f:
+        text = parser.parse(f)
+    assert "\n" in text, text
