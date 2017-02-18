@@ -45,3 +45,18 @@ def test_show_text_on_upload(uploadfn):
     with open('tests/pdfs/hello.pdf') as f:
         upload = uploadfn({'pdf': f}, True)
     assert "hello world" in upload.data, upload.data
+
+
+def test_page_numbers(uploadfn):
+    """Test if pdf text is correctly shown"""
+    with open('tests/pdfs/multipage.pdf') as f:
+        upload = uploadfn({'pdf': f, 'pages': "2"}, True)
+    assert "Second" in upload.data, "Missing second page"
+    assert "First" not in upload.data, "First page should not be present"
+
+
+def test_toast_on_invalid_page_numbers(uploadfn):
+    """Test if toast notifies the user the page numbers were not used"""
+    with open('tests/pdfs/hello.pdf') as f:
+        upload = uploadfn({'pdf': f, 'pages': 'a'}, True)
+    assert "Was not able to parse page numbers" in upload.data, upload.data

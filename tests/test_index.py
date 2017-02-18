@@ -19,11 +19,15 @@ def test_page_title(index):
 def test_upload_form(index):
     """Test if the index page has the upload elements"""
     assert b'action="/upload" method="post" enctype="multipart/form-data"'\
-        in index.data
-    assert (b'<input type="file" name="pdf"'
-            b' accept="application/pdf">') in index.data
+        in index.data, "Upload form missing from index"
+    assert (b'<input type="file" name="pdf" id="pdf"'
+            b' accept="application/pdf"') in index.data, \
+        "File input missing from index page"
     assert (b'<button type="submit" class="btn btn-primary"'
-            b'>Submit</button>') in index.data
+            b'>Submit</button>') in index.data, \
+        "Submit button missing from index page"
+    assert (b'<input type="text" name="pages"' in index.data), \
+        "Pages input missing from index page"
 
 
 @pytest.mark.parametrize('dep', ('bootstrap.min.css',
@@ -37,4 +41,4 @@ def test_bootstrap(index, dep):
 
 def test_hide_parsed_text(index):
     """Test if textarea with parsed text is hidden by default"""
-    assert '<textarea rows="10">' not in index.data, index.data
+    assert '<textarea' not in index.data, index.data
