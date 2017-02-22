@@ -1,0 +1,13 @@
+machine:
+  python:
+    version: 2.7.13
+
+dependencies:
+  override:
+    - pip install pytest pytest-cov
+test:
+  override:
+    - python setup.py test
+
+  post:
+    - bash <(curl -s https://codecov.io/bash) -X gcov -X coveragepy -f cov.xml -t $CODECOV_TOKEN
