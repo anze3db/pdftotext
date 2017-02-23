@@ -1,5 +1,7 @@
 # pdf to text
 
+[![CircleCI](https://circleci.com/gh/Smotko/pdftotext.svg?style=svg)](https://circleci.com/gh/Smotko/pdftotext) [![codecov](https://codecov.io/gh/Smotko/pdftotext/branch/master/graph/badge.svg)](https://codecov.io/gh/Smotko/pdftotext)
+
 Simple frontend for pdfminer.
 
 ## Install local environemnt:
