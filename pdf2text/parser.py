@@ -1,5 +1,6 @@
 """PDF parser"""
 
+import re
 import pdfminer.high_level
 from tempfile import TemporaryFile
 
@@ -13,7 +14,9 @@ def parse(f, pages=""):
         )
         out.seek(0)
         lines = out.read()
-        return lines
+        # Parse out line numbers
+        return '\n'.join(l for l in lines.splitlines()
+                         if re.search(r"^\d", l.strip()) is None)
 
 
 def parse_pages(pages):
