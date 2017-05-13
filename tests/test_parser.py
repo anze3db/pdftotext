@@ -55,6 +55,14 @@ def test_multipage_filtering(strings, count, expected):
         assert expected[i] in t
 
 
+def test_page_number_removal():
+    """Test page number removal"""
+    with open("tests/pdfs/numbers.pdf") as f:
+        text = parser.parse(f)
+    assert "321" not in text, "Page numbers not removed correctly" + text
+    assert "1" not in text, "Page numbers not removed correctly" + text
+
+
 @pytest.mark.parametrize("strings,expected", (
     ("", None),
     ("1", [0]),
